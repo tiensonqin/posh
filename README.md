@@ -31,7 +31,7 @@ For example, below is a component that displays a list of a person's age, name,
 and weight. The component will only re-render when something in the
 database changed an attribute of the `person-id` entity:
 
-```
+```clj
 (defn person [conn person-id]
   (let [p @(pull conn '[*] person-id)]
     [:ul
