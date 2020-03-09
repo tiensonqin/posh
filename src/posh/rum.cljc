@@ -2,12 +2,11 @@
   (:require #?(:clj  [posh.plugin-base :as base]
                :cljs [posh.plugin-base :as base :include-macros true])
             [datascript.core :as d]
-            [reagent.core :as r]
-            [reagent.ratom :as ra]))
+            [rum.core :as rum]))
 
 #?(:cljs
-   (defn make-reaction [reaction _key & local-mixin]
-     (apply ra/make-reaction (fn [] reaction) f local-mixin)))
+   (defn make-reaction [reaction key & local-mixin]
+     (rum/derived-atom [reaction] key idenity)))
 
 (def dcfg
   (let [dcfg {:db            d/db
@@ -20,8 +19,8 @@
               :transact!     d/transact!
               :listen!       d/listen!
               :conn?         d/conn?
-              :ratom         #?(:clj  nil
-                                :cljs r/atom)
+              :ratom         atom
+              :react         rum/react
               :make-reaction #?(:clj  nil
                                 :cljs make-reaction)}]
     (assoc dcfg :pull (partial base/safe-pull dcfg))))

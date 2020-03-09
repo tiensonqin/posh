@@ -100,9 +100,8 @@
                query-ratom          (or (get (:ratoms posh-atom-with-query) storage-key)
                                         ((:ratom dcfg) query-result))
                query-reaction       ((:make-reaction dcfg)
-                                     (fn []
-                                       ;;(println "RENDERING: " storage-key)
-                                       @query-ratom)
+                                     @query-ratom
+                                     storage-key
                                      :on-dispose
                                      (fn [_ _]
                                        ;;(println "no DISPOSING: " storage-key)
