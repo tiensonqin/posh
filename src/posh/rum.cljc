@@ -1,4 +1,4 @@
-(ns posh.reagent
+(ns posh.rum
   (:require #?(:clj  [posh.plugin-base :as base]
                :cljs [posh.plugin-base :as base :include-macros true])
             [datascript.core :as d]
@@ -6,7 +6,7 @@
 
 #?(:cljs
    (defn make-reaction [reaction key & local-mixin]
-     (rum/derived-atom [reaction] key idenity)))
+     (rum/derived-atom [reaction] key identity)))
 
 (def dcfg
   (let [dcfg {:db            d/db
